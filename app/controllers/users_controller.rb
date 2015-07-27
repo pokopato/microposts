@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :login_required
+  
   def new
     @user = User.new
   end
@@ -11,6 +13,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "Welcome to the Sample App!"
+      session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
       render 'new'
