@@ -1,0 +1,22 @@
+<div class="row">
+  <aside class="col-md-2">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+  <div class="col-md-10" style="border-left: 3px solid #eaeaea">
+    
+    <div class="col-sm-3"><h1 style="text-decoration: underline; font-style: italic">Following</h1></div>
+    <div class="col-sm-9" style="border-left: 1px solid #eaeaea">
+      <% @users.each do |user| %>
+        <div class="avatar">
+          <%= gravatar_for user, size: 60 %>
+          <h2><%= user.name %></h2>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

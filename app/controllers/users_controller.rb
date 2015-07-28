@@ -36,6 +36,16 @@ class UsersController < ApplicationController
     end
   end
   
+  def following
+    @user = current_user
+    @users = current_user.following_users.all
+  end
+  
+  def follower
+    @user = current_user
+    @users = current_user.followed_users.all
+  end
+  
   private
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
