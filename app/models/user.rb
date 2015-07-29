@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
                                     dependent: :destroy
   has_many :followed_users, through: :followed_relationships, source: :follower
   
+  mount_uploader :avatar, AvatarUploader
+  
   
   validates :name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\z/i
