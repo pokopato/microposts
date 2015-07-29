@@ -15,6 +15,9 @@
     <%= f.label :password_confirmation, "パスワード（確認）" %>
     <%= f.password_field :password_confirmation %>
     
+    <%= f.file_field :avatar %>
+    <%= f.hidden_field :avatar_cache %>
+    
     <%= f.submit 'Create my account', class: "btn btn-lg btn-primary" %>
   <% end %>
 </div>
