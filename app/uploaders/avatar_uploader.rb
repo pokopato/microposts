@@ -6,15 +6,21 @@ class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
   
   # 画像の上限を700pxにする
-  process :resize_to_limit => [700, 700]
+  # process :resize_to_limit => [700, 700]
   
   # 保存形式をJPGにする
   process :convert => 'jpg'
   
   # サムネイルを生成する設定
-  version :thumb do
-    process :resize_to_limit => [300, 300]
+  version :small do
+    process :resize_to_fill => [50, 50]
   end
+  
+  version :medium do
+    process :resize_to_fill => [80, 80]
+  end
+  
+  
   
   # jpg,jpeg,gif,pngしか受け付けない
   def extension_white_list
@@ -26,9 +32,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
     super.chomp(File.extname(super)) + '.jpg' if original_filename.present?
   end
 
-  # storage :file
-
-  # def store_dir
-  #   "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  # end
+  storage :file
+  
+  # ファイルを入れるディレクトリを指定
+  def store_dir
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  end
 end

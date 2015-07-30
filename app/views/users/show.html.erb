@@ -3,7 +3,7 @@
     <section class="user_info">
       <h1>
         <% if @user.avatar? %>
-          <%= image_tag @user.avatar.thumb.url %>
+          <%= image_tag @user.avatar.medium.url %>
         <% else %>
           <%= gravatar_for @user %>
         <% end %>
