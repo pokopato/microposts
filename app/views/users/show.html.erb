@@ -8,6 +8,10 @@
           <%= gravatar_for @user %>
         <% end %>
         <%= @user.name %>
+        <br />
+        <%= link_to 'Following Users', following_path %>
+        <br />
+        <%= link_to 'Follower Users', follower_path %>
       </h1>
     </section>
   </aside>
