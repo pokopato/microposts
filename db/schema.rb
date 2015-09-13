@@ -11,8 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+ActiveRecord::Schema.define(version: 20150913114429) do
 
-ActiveRecord::Schema.define(version: 20150729164703) do
+  create_table "favoriteships", force: :cascade do |t|
+    t.integer  "user_id",      null: false
+    t.integer  "micropost_id", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "microposts", force: :cascade do |t|
     t.integer  "user_id"
