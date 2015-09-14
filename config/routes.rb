@@ -7,8 +7,13 @@ Rails.application.routes.draw do
   get 'users/:id/following' => 'users#following', as: 'following'
   get 'users/:id/follower'  => 'users#follower',  as: 'follower'
   
-  resources :users
+  resources :users do 
+    member do
+      get 'favorites' => 'users#favorite', as: 'favorites'
+    end
+  end
   resources :relationships, only: [:create, :destroy]
+  resources :favoriteships, only: [:create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts
 end

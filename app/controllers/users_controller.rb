@@ -51,6 +51,10 @@ class UsersController < ApplicationController
     @users = @user.followed_users.all
   end
   
+  def favorite
+    @feed_items = current_user.favorited_posts.page(params[:page])
+  end
+  
   private
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)

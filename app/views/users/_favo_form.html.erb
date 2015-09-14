@@ -1,0 +1,8 @@
+<% @feed_item = feed_item %>
+<div class="favo_form-<%= @feed_item.id %>">
+  <% if current_user.favo?(@feed_item) %>
+    <%= render 'users/unfavo' %>
+  <% else %>
+    <%= render 'users/favo' %>
+  <% end %>
+</div>

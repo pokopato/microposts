@@ -13,6 +13,11 @@ class User < ActiveRecord::Base
                                     dependent: :destroy
   has_many :followed_users, through: :followed_relationships, source: :follower
   
+  has_many :favoriteships,  class_name: "Favoriteship",
+                            foreign_key: "user_id", 
+                            dependent: :destroy
+  has_many :favorited_posts, through: :favoriteships, source: :micropost
+  
   mount_uploader :avatar, AvatarUploader
   
   
@@ -35,6 +40,18 @@ class User < ActiveRecord::Base
   
   def feed_items
     Micropost.where(user_id: following_user_ids + [self.id])
+  end
+  
+  def favo(micropost)
+    favoriteships.find_or_create_by(micropost_id: micropost.id)
+  end
+  
+  def unfavo(micropost)
+    favoriteships.find_by(micropost_id: micropost.id).destroy
+  end
+  
+  def favo?(micropost)
+    favorited_posts.include?(micropost)
   end
   
   has_secure_password
